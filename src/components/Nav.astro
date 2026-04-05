@@ -6,9 +6,9 @@
 
     <!-- Desktop nav -->
     <ul class="hidden md:flex items-center gap-8 list-none m-0 p-0">
-      <li><a href="#work" class="text-muted text-sm hover:text-primary transition-colors duration-150">work</a></li>
-      <li><a href="#projects" class="text-muted text-sm hover:text-primary transition-colors duration-150">projects</a></li>
-      <li><a href="#contact" class="text-muted text-sm hover:text-primary transition-colors duration-150">contact</a></li>
+      <li><a href="#work" data-nav="work" class="nav-link text-muted text-sm hover:text-primary transition-colors duration-150">work</a></li>
+      <li><a href="#projects" data-nav="projects" class="nav-link text-muted text-sm hover:text-primary transition-colors duration-150">projects</a></li>
+      <li><a href="#contact" data-nav="contact" class="nav-link text-muted text-sm hover:text-primary transition-colors duration-150">contact</a></li>
     </ul>
 
     <!-- Mobile hamburger -->
@@ -54,5 +54,29 @@
       iconOpen?.classList.remove('hidden');
       iconClose?.classList.add('hidden');
     });
+  });
+
+  // Active nav highlighting
+  const sections = ['work', 'projects', 'contact'];
+  const navLinks = document.querySelectorAll<HTMLElement>('.nav-link');
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            const isActive = link.dataset.nav === entry.target.id;
+            link.classList.toggle('text-primary', isActive);
+            link.classList.toggle('text-muted', !isActive);
+          });
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px' }
+  );
+
+  sections.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) sectionObserver.observe(el);
   });
 </script>
