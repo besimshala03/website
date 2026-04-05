@@ -1,0 +1,37 @@
+---
+const categories = [
+  {
+    label: 'LLMs & AI',
+    tags: ['Python', 'LangChain', 'Prompt Engineering', 'LLM-as-a-Judge', 'OpenAI', 'Hugging Face'],
+  },
+  {
+    label: 'Cloud & Infra',
+    tags: ['AWS (ECS, Lambda, S3, API Gateway, VPC)', 'Terraform', 'Docker', 'Keycloak', 'Hetzner'],
+  },
+  {
+    label: 'Backend',
+    tags: ['Java', 'Spring Boot', 'FastAPI', 'Flask', 'TypeScript', 'Node.js', 'MySQL', 'SQLite'],
+  },
+  {
+    label: 'Frontend',
+    tags: ['Angular', 'React', 'Astro', 'Tailwind CSS'],
+  },
+];
+---
+<section id="stack" class="max-w-5xl mx-auto px-6 pt-10 pb-16 fade-up">
+  <h2 class="text-xs text-muted uppercase tracking-widest mb-10">stack</h2>
+  <div class="space-y-6">
+    {categories.map(cat => (
+      <div class="flex flex-wrap items-start gap-3">
+        <span class="text-xs text-muted w-24 flex-shrink-0 pt-1">{cat.label}</span>
+        <div class="flex flex-wrap gap-2">
+          {cat.tags.map(tag => (
+            <span class="px-2.5 py-1 text-xs bg-tag border border-border text-tagtext rounded-sm">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

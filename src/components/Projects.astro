@@ -1,0 +1,72 @@
+---
+const projects = [
+  {
+    title: 'LLM-Based Sequential Early-Detection System',
+    grade: '1.0',
+    description:
+      'Sequential LLM-based approach for early detection of online firestorms on Reddit. Two-mode system: Global Recognition (F1=0.91) and Early Warning Mode (98% recall, avg. 8.6 comments to detection).',
+    tags: ['LLM-as-a-Judge', 'Hierarchical Classification', 'Sliding Window', 'Reddit API', 'Grid Search'],
+    links: [
+      { label: 'Paper (TBD)', href: '' },
+      { label: 'GitLab', href: 'https://gitlab.lrz.de/000000003B9B0645/shitstorm_detector' },
+    ],
+  },
+  {
+    title: 'LLM Forecasting Benchmark',
+    description:
+      'Benchmarking LLMs as probabilistic forecasters on live Polymarket prediction markets. Evaluated via Brier Score and calibration metrics.',
+    tags: ['Python', 'Polymarket API', 'Brier Score', 'Calibration'],
+    links: [{ label: 'GitHub (TBD)', href: '' }],
+  },
+  {
+    title: 'Containerized Microservices Architecture',
+    grade: '1.0',
+    description:
+      'Containerized microservices planning tool built with Angular and Spring Boot. Two vertically structured services (Kanban & Settings) with independent frontends, backends and databases orchestrated via Docker Compose with centralized Keycloak SSO.',
+    tags: ['Angular', 'Spring Boot', 'Docker', 'Keycloak', 'MySQL'],
+    links: [{ label: 'GitHub', href: 'https://github.com/besimshala03/taskManagementTool' }],
+  },
+  {
+    title: 'Citation Verification MVP',
+    description:
+      'LLM-powered academic citation verifier with a FastAPI backend and React frontend. Extracts Harvard-style citations from PDFs and DOCX files, matches them against uploaded reference papers and classifies each claim as SUPPORTS, CONTRADICTS, NOT_RELEVANT or UNCERTAIN using OpenAI.',
+    tags: ['Python', 'FastAPI', 'React', 'OpenAI', 'SQLite'],
+    links: [{ label: 'GitHub', href: 'https://github.com/besimshala03/Citation-Verification-MVP' }],
+  },
+];
+---
+<section id="projects" class="max-w-5xl mx-auto px-6 pt-16 pb-10 fade-up">
+  <h2 class="text-xs text-muted uppercase tracking-widest mb-10">projects</h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    {projects.map(project => (
+      <div class="bg-surface border border-border p-6 hover:border-accent transition-colors duration-150 flex flex-col gap-4">
+        <div class="flex-1">
+          <div class="flex items-baseline gap-2 mb-2">
+            <h3 class="text-sm font-medium text-primary">{project.title}</h3>
+            {'grade' in project && <span class="text-xs text-accent">· {(project as any).grade}</span>}
+          </div>
+          <p class="text-xs text-muted leading-relaxed">{project.description}</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          {project.tags.map(tag => (
+            <span class="px-2 py-0.5 text-xs bg-tag border border-border text-tagtext rounded-sm">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div class="flex gap-4 mt-auto pt-2">
+          {project.links.map(link => (
+            link.href
+              ? <a
+                  href={link.href}
+                  class="text-xs text-accent hover:text-primary transition-colors duration-150"
+                >
+                  {link.label} →
+                </a>
+              : <span class="text-xs text-muted">{link.label}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
