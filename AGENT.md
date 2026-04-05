@@ -67,6 +67,24 @@ All values are in `tailwind.config.mjs` as custom colors/fonts:
 - `md:` breakpoint: two-column layouts (About label/content, Experience work/education)
 - `lg:` breakpoint: Projects grid goes 2-column
 
+## Known Bugs
+
+### Active nav highlighting — "work" link never highlights
+**File:** `src/components/Nav.astro`
+**Status:** Unresolved. Multiple approaches attempted, none worked fully.
+
+The nav uses a scroll listener + `getBoundingClientRect()` to highlight the active section. Contact highlights correctly (special-cased via `atBottom` check). Projects highlights correctly. But the "work" nav link (pointing to `id="work"` on the Experience section) never activates.
+
+**Attempts tried:**
+1. Intersection Observer with `rootMargin: '-40% 0px -55% 0px'` — contact never triggered
+2. `scrollY + offset >= section.offsetTop` — contact never triggered (section too short to reach)
+3. `getBoundingClientRect().top - navHeight <= 0` — work never triggered (top lands at 0 or slightly positive)
+4. Same as above with `<= 20` buffer — still didn't work
+
+**Suspected cause:** The Experience section (`id="work"`) is large and sits between Projects and Stack. When scrolled to it, its `getBoundingClientRect().top` may never satisfy the threshold due to smooth scroll overshoot, section height, or layout specifics. The `atBottom` special-case for contact also means the bottom portion of the page skips the loop entirely.
+
+**Suggested next approach:** Rethink the detection strategy — e.g. track which section occupies the most viewport area, or use a dedicated scroll-spy library.
+
 ## Running Locally
 
 ```bash
