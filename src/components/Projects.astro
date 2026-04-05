@@ -37,24 +37,30 @@ const projects = [
 ---
 <section id="projects" class="max-w-5xl mx-auto px-6 pt-16 pb-10 fade-up">
   <h2 class="text-xs text-muted uppercase tracking-widest mb-10">projects</h2>
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
     {projects.map(project => (
-      <div class="bg-surface border border-border p-6 hover:border-accent transition-colors duration-150 flex flex-col gap-4">
-        <div class="flex-1">
-          <div class="flex items-baseline gap-2 mb-2">
-            <h3 class="text-sm font-medium text-primary">{project.title}</h3>
+      <div class="project-card bg-surface border border-border p-6 md:p-7 hover:border-accent transition-colors duration-150 flex flex-col gap-5">
+        <div>
+          <div class="flex items-center justify-between gap-4 mb-3">
+            <span class="text-[10px] uppercase tracking-[0.24em] text-muted">selected work</span>
+            <div class="flex items-baseline gap-2">
             {'grade' in project && <span class="text-xs text-accent">· {(project as any).grade}</span>}
+            </div>
           </div>
-          <p class="text-xs text-muted leading-relaxed">{project.description}</p>
+          <div class="flex items-baseline gap-2 mb-3">
+            <h3 class="text-sm font-medium text-primary">{project.title}</h3>
+          </div>
+          <p class="project-description text-xs text-muted leading-relaxed">{project.description}</p>
         </div>
-        <div class="flex flex-wrap gap-1.5">
+        <div class="project-divider"></div>
+        <div class="flex flex-wrap gap-2">
           {project.tags.map(tag => (
-            <span class="px-2 py-0.5 text-xs bg-tag border border-border text-tagtext rounded-sm">
+            <span class="px-2.5 py-1 text-xs bg-tag border border-border text-tagtext rounded-sm">
               {tag}
             </span>
           ))}
         </div>
-        <div class="flex gap-4 mt-auto pt-2">
+        <div class="flex flex-wrap gap-5 mt-auto pt-1">
           {project.links.map(link => (
             link.href
               ? <a
