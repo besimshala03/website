@@ -83,7 +83,6 @@ The nav uses a scroll listener + `getBoundingClientRect()` to highlight the acti
 
 **Suspected cause:** The Experience section (`id="work"`) is large and sits between Projects and Stack. When scrolled to it, its `getBoundingClientRect().top` may never satisfy the threshold due to smooth scroll overshoot, section height, or layout specifics. The `atBottom` special-case for contact also means the bottom portion of the page skips the loop entirely.
 
-**Suggested next approach:** Rethink the detection strategy — e.g. track which section occupies the most viewport area, or use a dedicated scroll-spy library.
 
 ## Running Locally
 
